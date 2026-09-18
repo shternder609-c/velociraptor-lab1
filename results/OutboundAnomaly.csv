@@ -1,0 +1,2 @@
+Pid,ProcessName,LocalIP,LocalPort,RemoteIP,RemotePort,Status
+6864,powershell.exe,192.168.56.20,49674,192.168.56.10,4444,ESTAB

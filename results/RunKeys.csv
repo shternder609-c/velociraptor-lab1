@@ -1,0 +1,3 @@
+OSPath,Name,Command
+HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Run\SecurityHealth,SecurityHealth,%windir%\system32\SecurityHealthSystray.exe
+HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Run\VeloLabPersistance,VeloLabPersistance,"""C:\Windows\Temp\velo-benign-test.exe"""
