@@ -1,0 +1,52 @@
+---
+- name: Deploy Velociraptor client on BaseALT
+  hosts: basealt
+  become: true
+  become_method: su
+  gather_facts: false
+
+  vars:
+    velo_rpm: /tmp/velociraptor-client.rpm
+    velo_service: velociraptor_client.service
+
+  tasks:
+    - name: Copy Velociraptor RPM to BaseALT
+      ansible.builtin.copy:
+        src: files/velociraptor-client.rpm
+        dest: "{{ velo_rpm }}"
+        mode: "0644"
+
+    - name: Read package name from RPM
+      ansible.builtin.command:
+        argv:
+          - rpm
+          - -qp
+          - --queryformat
+          - "%{NAME}"
+          - "{{ velo_rpm }}"
+      register: velo_package
+      changed_when: false
+
+    - name: Check if Velociraptor package is installed
+      ansible.builtin.command:
+        argv:
+          - rpm
+          - -q
+          - "{{ velo_package.stdout }}"
+      register: velo_installed
+      changed_when: false
+      failed_when: false
+
+    - name: Install Velociraptor RPM if absent
+      ansible.builtin.command:
+        argv:
+          - rpm
+          - -Uvh
+          - "{{ velo_rpm }}"
+      when: velo_installed.rc != 0
+
+    - name: Ensure Velociraptor service is enabled and running
+      ansible.builtin.systemd:
+        name: "{{ velo_service }}"
+        enabled: true
+        state: started

@@ -1,0 +1,8 @@
+SELECT 
+        OSPath,
+        Name,
+        Size,
+        Mtime
+      FROM glob(
+          globs="C:/Windows/Temp/*.exe"
+        )

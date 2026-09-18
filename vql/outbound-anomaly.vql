@@ -1,0 +1,17 @@
+SELECT
+        Pid,
+        {
+          SELECT Name
+          FROM processes
+          WHERE Pid = ProcPid
+        } AS ProcessName,
+        Laddr.IP AS LocalIP,
+        Laddr.Port AS LocalPort,
+        Raddr.IP AS RemoteIP,
+        Raddr.Port AS RemotePort,
+	Status
+FROM netstat()
+WHERE TypeString = "TCP"
+        AND Status = "ESTAB"
+        AND Raddr.IP = "192.168.56.10"
+        AND Raddr.Port != 8000

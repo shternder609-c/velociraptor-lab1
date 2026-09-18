@@ -1,0 +1,21 @@
+
+PLAY [Deploy Velociraptor client on BaseALT] ***********************************
+
+TASK [Copy Velociraptor RPM to BaseALT] ****************************************
+ok: [basealt-client]
+
+TASK [Read package name from RPM] **********************************************
+ok: [basealt-client]
+
+TASK [Check if Velociraptor package is installed] ******************************
+ok: [basealt-client]
+
+TASK [Install Velociraptor RPM if absent] **************************************
+skipping: [basealt-client]
+
+TASK [Ensure Velociraptor service is enabled and running] **********************
+ok: [basealt-client]
+
+PLAY RECAP *********************************************************************
+basealt-client             : ok=4    changed=0    unreachable=0    failed=0    skipped=1    rescued=0    ignored=0   
+
